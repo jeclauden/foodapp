@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/category_meals_screen.dart';
-import 'package:foodapp/gategories_screen.dart';
+import './screens/category_meals_screen.dart';
+import 'screens/meals_categories_screen.dart';
 import './routes/app_routes.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             .copyWith(secondary: Colors.red),
       ),
       home: const CategoriesScreen(),
-      routes: {AppRoutes.categoryMeal: (ctx) => CategoryMealsScreen()},
+      routes: {AppRoutes.mealCategoryRoute: (ctx) => CategoryMealsScreen()},
     );
   }
 }

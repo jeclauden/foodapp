@@ -1,4 +1,4 @@
 class AppRoutes {
   AppRoutes._();
-  static const String categoryMeal = '/category-meals';
+  static const String mealCategoryRoute = '/category-meals';
 }
