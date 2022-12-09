@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/category_meals_screen.dart';
 import 'package:foodapp/gategories_screen.dart';
+import './routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,8 +16,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Deli Meals',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.red,
         canvasColor: const Color.fromRGBO(229, 244, 253, 1),
         fontFamily: "Raleway",
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -30,8 +30,11 @@ class MyApp extends StatelessWidget {
               fontFamily: 'RobotoCondesended',
               fontWeight: FontWeight.bold,
             )),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.red),
       ),
       home: const CategoriesScreen(),
+      routes: {AppRoutes.categoryMeal: (ctx) => CategoryMealsScreen()},
     );
   }
 }
