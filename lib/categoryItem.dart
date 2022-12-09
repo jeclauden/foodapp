@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class CategortItem extends StatelessWidget {
   final String title;
@@ -26,7 +25,10 @@ class CategortItem extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Text(title),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.headline1,
+      ),
     );
   }
 }
