@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/screens/meal_details_screen.dart';
+import 'package:foodapp/screens/tabs_screen.dart';
 import './screens/category_meals_screen.dart';
 import 'screens/meals_categories_screen.dart';
 import './routes/app_routes.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Colors.red),
       ),
-      home: const CategoriesScreen(),
+      // home: const CategoriesScreen(),
       // onGenerateRoute has other options. Check it out
       // onGenerateRoute: ((settings) {
       //   // some logics here
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
 
       // Can manually register named routes
       routes: {
+        '/': (ctx) => const TabsScreen(),
         AppRoutes.mealCategory: (ctx) => const CategoryMealsScreen(),
         AppRoutes.mealDetails: (ctx) => const MealDetailsScreen(),
       },
