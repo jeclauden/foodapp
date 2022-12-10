@@ -15,7 +15,7 @@ class CategortItem extends StatelessWidget {
 
   void selectCategory(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(
-      AppRoutes.mealCategoryRoute,
+      AppRoutes.mealCategory,
       arguments: {
         'id': id,
         'title': title,

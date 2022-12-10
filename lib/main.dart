@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/screens/meal_details_screen.dart';
 import './screens/category_meals_screen.dart';
 import 'screens/meals_categories_screen.dart';
 import './routes/app_routes.dart';
@@ -34,7 +35,25 @@ class MyApp extends StatelessWidget {
             .copyWith(secondary: Colors.red),
       ),
       home: const CategoriesScreen(),
-      routes: {AppRoutes.mealCategoryRoute: (ctx) => CategoryMealsScreen()},
+      // onGenerateRoute has other options. Check it out
+      // onGenerateRoute: ((settings) {
+      //   // some logics here
+      //   return MaterialPageRoute(
+      //     builder: ((context) => const CategoriesScreen()),
+      //   );
+      // }),
+
+      // Can manually register named routes
+      routes: {
+        AppRoutes.mealCategory: (ctx) => const CategoryMealsScreen(),
+        AppRoutes.mealDetails: (ctx) => const MealDetailsScreen(),
+      },
+      // Fallback is route cannot be found
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => const CategoriesScreen(),
+        );
+      },
     );
   }
 }

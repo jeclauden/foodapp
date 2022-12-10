@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/routes/app_routes.dart';
 
 import '../models/meal.dart';
 
+import 'package:gap/gap.dart';
+
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final Complexity complexity;
@@ -11,6 +15,7 @@ class MealItem extends StatelessWidget {
 
   const MealItem({
     Key? key,
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
@@ -18,12 +23,47 @@ class MealItem extends StatelessWidget {
     required this.affordability,
   }) : super(key: key);
 
-  void selectMeal() {}
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.simple:
+        return "Simple";
+      case Complexity.challenging:
+        return "Challenging";
+      case Complexity.hard:
+        return "Hard";
+      default:
+        return "Unknown";
+    }
+  }
+
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.affordable:
+        return "Affordable";
+      case Affordability.luxurious:
+        return "Luxurious";
+      case Affordability.pricey:
+        return "Pricey";
+      default:
+        return "Unknown";
+    }
+  }
+
+  Gap get getSpacer {
+    return const Gap(10);
+  }
+
+  void viewMealDetails(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      AppRoutes.mealDetails,
+      arguments: id,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: selectMeal,
+      onTap: () => viewMealDetails(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -47,8 +87,55 @@ class MealItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
+                // Positioned Widget works inside a Stack so that it can be positioned
+                Positioned(
+                  bottom: 15,
+                  right: 15,
+                  child: Container(
+                    width: 300,
+                    color: Colors.black54,
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 26,
+                        color: Colors.white,
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                )
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.schedule),
+                        getSpacer,
+                        Text("$duration mins"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.work),
+                        getSpacer,
+                        Text(complexityText),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.attach_money),
+                        getSpacer,
+                        Text(affordabilityText),
+                      ],
+                    ),
+                  ]),
+            )
           ],
         ),
       ),
