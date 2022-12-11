@@ -23,7 +23,7 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
-  String getTitle(int index) {
+  String _getAppBarTitle(int index) {
     switch (index) {
       case 0:
         return "Categories";
@@ -38,7 +38,7 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTitle(_selectedPageIndex)),
+        title: Text(_getAppBarTitle(_selectedPageIndex)),
       ),
       body: _pages[_selectedPageIndex],
       bottomNavigationBar: BottomNavigationBar(
