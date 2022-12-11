@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/screens/filters_screen.dart';
 import 'package:foodapp/screens/meal_details_screen.dart';
 import 'package:foodapp/screens/tabs_screen.dart';
 import './screens/category_meals_screen.dart';
@@ -46,9 +47,10 @@ class MyApp extends StatelessWidget {
 
       // Can manually register named routes
       routes: {
-        '/': (ctx) => const TabsScreen(),
+        AppRoutes.mealTabs: (ctx) => const TabsScreen(),
         AppRoutes.mealCategory: (ctx) => const CategoryMealsScreen(),
         AppRoutes.mealDetails: (ctx) => const MealDetailsScreen(),
+        AppRoutes.filterScreen: (ctx) => const FiltersScreen(),
       },
       // Fallback is route cannot be found
       onUnknownRoute: (settings) {

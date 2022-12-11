@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/screens/favourites_screen.dart';
-import 'package:foodapp/screens/meals_categories_screen.dart';
+import '../screens/favourites_screen.dart';
+import '../screens/meals_categories_screen.dart';
+
+import '../widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -41,6 +43,7 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Text(_getAppBarTitle(_selectedPageIndex)),
       ),
       body: _pages[_selectedPageIndex],
+      drawer: const MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.amber,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../routes/app_routes.dart';
 
-class CategortItem extends StatelessWidget {
+class CategoryItem extends StatelessWidget {
   final String id;
   final String title;
   final Color color;
 
-  const CategortItem({
+  const CategoryItem({
     required this.id,
     required this.title,
     required this.color,
