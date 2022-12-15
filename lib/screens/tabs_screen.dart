@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import '../models/meal.dart';
 import '../screens/favourites_screen.dart';
 import '../screens/meals_categories_screen.dart';
 
 import '../widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<Meal> favouriteMeals;
+  const TabsScreen({
+    Key? key,
+    required this.favouriteMeals,
+  }) : super(key: key);
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Widget> _pages = [
-    const CategoriesScreen(),
-    const FavouritesScreen(),
-  ];
+  List<Widget> _pages = [];
 
   int _selectedPageIndex = 0;
 
@@ -23,6 +25,18 @@ class _TabsScreenState extends State<TabsScreen> {
     setState(() {
       _selectedPageIndex = index;
     });
+  }
+
+  // This initialisation allows to get access to the widget.favouriteMeals
+  @override
+  void initState() {
+    _pages = [
+      const CategoriesScreen(),
+      FavouritesScreen(
+        favouriteMeals: widget.favouriteMeals,
+      ),
+    ];
+    super.initState();
   }
 
   String _getAppBarTitle(int index) {

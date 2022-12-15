@@ -3,7 +3,13 @@ import 'package:foodapp/dummy_data.dart';
 import 'package:foodapp/utilities/custom_row.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({Key? key}) : super(key: key);
+  final Function toggleFavourite;
+  final Function isFavourite;
+  const MealDetailsScreen({
+    Key? key,
+    required this.toggleFavourite,
+    required this.isFavourite,
+  }) : super(key: key);
 
   String getIngredients(List<String> ingredients) {
     var buffer = StringBuffer();
@@ -97,10 +103,10 @@ class MealDetailsScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
+        onPressed: (() => toggleFavourite(mealId)),
+        child: Icon(
+          isFavourite(mealId) ? Icons.favorite : Icons.favorite_border,
+        ),
       ),
     );
   }

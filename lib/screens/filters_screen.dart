@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key});
+  const FiltersScreen({
+    super.key,
+    required this.saveFilters,
+    required this.currentFilters,
+  });
+
+  final Function saveFilters;
+  final Map<String, bool> currentFilters;
 
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
@@ -14,6 +21,16 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _vegan = false;
   var _vegeterian = false;
 
+  @override
+  void initState() {
+    _glutenFree = widget.currentFilters['gluten']!;
+    _lactoseFree = widget.currentFilters['lactose']!;
+    _vegan = widget.currentFilters['vegan']!;
+    _vegeterian = widget.currentFilters['vegetarian']!;
+    super.initState();
+  }
+
+  // Create a SwitchListTile
   Widget _buildSwitchListTile(
     String title,
     String description,
@@ -33,6 +50,21 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Filters"),
+        // actions: [
+        //   IconButton(
+        //       onPressed: (() {
+        //         final selectedFilters = {
+        //           'gluten': _glutenFree,
+        //           'lactose': _lactoseFree,
+        //           'vegan': _vegan,
+        //           'vegetarian': _vegeterian,
+        //         };
+        //         widget.saveFilters(selectedFilters);
+        //       }),
+        //       icon: const Icon(
+        //         Icons.save,
+        //       ))
+        // ],
       ),
       body: Column(
         children: [
@@ -56,6 +88,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   setState(
                     () {
                       _glutenFree = newValue;
+                      widget.saveFilters('gluten', newValue);
                     },
                   );
                 },
@@ -68,6 +101,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   setState(
                     () {
                       _lactoseFree = newValue;
+                      widget.saveFilters('lactose', newValue);
                     },
                   );
                 },
@@ -80,6 +114,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   setState(
                     () {
                       _vegeterian = newValue;
+                      // var kand = {'vegetarian': newValue};
+                      widget.saveFilters('vegetarian', newValue);
                     },
                   );
                 },
@@ -92,6 +128,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   setState(
                     () {
                       _vegan = newValue;
+                      widget.saveFilters('vegan', newValue);
                     },
                   );
                 },

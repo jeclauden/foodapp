@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../dummy_data.dart';
 import '../models/meal.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
+  final List<Meal> avalaibleMeals;
+
   const CategoryMealsScreen({
     Key? key,
+    required this.avalaibleMeals,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
           ModalRoute.of(context)!.settings.arguments as Map<String, String>;
       final categoryId = routeArgs['id'];
       categoryTitle = routeArgs['title']!;
-      meals = DUMMY_MEALS.where(
+      meals = widget.avalaibleMeals.where(
         (meal) {
           return meal.categories.contains(categoryId);
         },
@@ -39,12 +41,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       _didLoadData = true;
     }
     super.didChangeDependencies();
-  }
-
-  void _removeMeal(String mealId) {
-    setState(() {
-      meals.removeWhere((meal) => meal.id == mealId);
-    });
   }
 
   @override
@@ -56,13 +52,13 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
       body: ListView.builder(
         itemBuilder: (ctx, index) {
           return MealItem(
-              removeMealItem: _removeMeal,
-              id: meals[index].id,
-              title: meals[index].title,
-              imageUrl: meals[index].imageUrl,
-              duration: meals[index].duration,
-              complexity: meals[index].complexity,
-              affordability: meals[index].affordability);
+            id: meals[index].id,
+            title: meals[index].title,
+            imageUrl: meals[index].imageUrl,
+            duration: meals[index].duration,
+            complexity: meals[index].complexity,
+            affordability: meals[index].affordability,
+          );
         },
         itemCount: meals.length,
       ),

@@ -12,7 +12,6 @@ class MealItem extends StatelessWidget {
   final Complexity complexity;
   final Affordability affordability;
   final int duration;
-  final Function removeMealItem;
 
   const MealItem({
     Key? key,
@@ -22,7 +21,6 @@ class MealItem extends StatelessWidget {
     required this.duration,
     required this.complexity,
     required this.affordability,
-    required this.removeMealItem,
   }) : super(key: key);
 
   String get complexityText {
@@ -56,17 +54,10 @@ class MealItem extends StatelessWidget {
   }
 
   void viewMealDetails(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushNamed(
+    Navigator.of(ctx).pushNamed(
       AppRoutes.mealDetails,
       arguments: id,
-    )
-        .then((value) {
-      // This value is saved in the pop method in meal details screen
-      if (value != null) {
-        removeMealItem(value);
-      }
-    });
+    );
   }
 
   @override
